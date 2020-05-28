@@ -25,7 +25,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use ethaniccc\CrossOnlineCount\Tasks\InstallSlapper;
 use ethaniccc\CrossOnlineCount\Tasks\QueryServer;
 
-class Main extends PluginBase implements Listener{
+class Main extends PluginBase implements Listener {
 
     private static $instance;
 
@@ -48,38 +48,41 @@ class Main extends PluginBase implements Listener{
     }
 
     public function onDisable(){
-      foreach($this->getServer()->getLevels() as $level) {
-			  foreach($level->getEntities() as $entity) {
-				  if(!empty($entity->namedtag->getString("server", ""))) {
-					  $lines = explode("\n", $entity->getNameTag());
-					  $lines[1] = $entity->namedtag->getString("server", "");
-					  $nametag = implode("\n", $lines);
-					  $entity->setNameTag($nametag);
-				  }
-			  }
-		  }
-    }
+		foreach($this->getServer()->getLevels() as $level) {
+			foreach($level->getEntities() as $entity) {
+				if(!empty($entity->namedtag->getString("server", ""))) {
+					$lines = explode("\n", $entity->getNameTag());
+					$lines[1] = $entity->namedtag->getString("server", "");
+					$nametag = implode("\n", $lines);
+					$entity->setNameTag($nametag);
+				}
+			}
+		}
+	}
 
     public static function getMain() {
         return self::$instance;
     }
 
     public function updateSlapper(){
-      foreach($this->getServer()->getLevels() as $level) {
-			  foreach($level->getEntities() as $entity) {
-				  if(!empty($entity->namedtag->getString("server", ""))) {
+        foreach($this->getServer()->getLevels() as $level) {
+            foreach($level->getEntities() as $entity) {
+                if(!empty($entity->namedtag->getString("server", ""))) {
                     $server = explode(":", $entity->namedtag->getString("server", ""));
                     if(isset($server[0])){
                         switch($server[0]){
                             case "server":
-                                if(!isset($server[1])) $ip = 0;
-                                else $ip = $server[1];
+                                if(!isset($server[1])) {
+                                    $ip = 0;
+				} else {
+                                    $ip = $server[1];
+				}
                                 if(!isset($server[2])) $port = 19132;
                                 else $port = $server[2];
                                 if($ip == 0) $do = false;
                                 else $do = true;
                                 if($do === true) $this->getServer()->getAsyncPool()->submitTask(new QueryServer($ip, $port, $entity->getId(), $this->getConfig()->get("server_online_message"), $this->getConfig()->get("server_offline_message")));
-                            break;
+                                break;
                             case "world":
                                 if(!isset($server[1])) $world = "aa46b8ednonono";
                                 else $world = $this->getServer()->getLevelByName($server[1]);
@@ -99,10 +102,10 @@ class Main extends PluginBase implements Listener{
                                     $nametag = implode("\n", $lines);
 			                        $entity->setNameTag($nametag);
                                 }
-                            break;
+                                break;
                             default:
 
-                            break;
+                                break;
                         }
                     }
 				  }
