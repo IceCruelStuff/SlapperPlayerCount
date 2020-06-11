@@ -2,6 +2,15 @@
 # Feel free to go see my GitHub for more plugins!
 # https://www.github.com/ethaniccc
 
+# PLEASE DO NOT TOUCH THIS #
+version: 2.1.2
+
+############### General ###############
+# Select how often the slapper should be updated. Please note that less ticks
+# can result in more lag. I reccommend using 100 ticks, which is equal to 5 seconds.
+# Please make sure the number is only a WHOLE INTEGER.
+update_ticks: 100
+
 ############### Server ###############
 
 # This is the message you want when you are getting the players of another server
@@ -17,6 +26,12 @@ server_offline_message: "§l§4Server Offline"
 
 ############### World ###############
 
+### WorldPlayerCount Support! ###
+# If this setting is enabled, world querying will be
+# from WorldPlayerCount, and all lower options
+# will be void. By default, WPC support is disabled.
+wpc_support: false
+
 # This is the message you want when you are getting the amount of players on a world
 # You can use {playing} to show the amount of players on the world.
 
@@ -25,14 +40,3 @@ players_world_message: "§l§e{playing} playing"
 # This is the message you want when something goes wrong and we can't find the world
 
 world_error_message: "§l§4World Not Found!"
-
-############### Miscellaneous ###############
-
-# When this setting is enabled, if a server is offline, or if a world is not found, the
-# player will take knockback. By default this is disabled.
-
-server_offline_knockback: false
-server_offline_knockback_amount: 0.4
-
-world_nofind_knockback: false
-world_nofind_knockback_amount: 0.4
