@@ -94,9 +94,9 @@ class Main extends PluginBase implements Listener {
     }
 
     public function updateSlapper() : void {
-      foreach ($this->getServer()->getLevels() as $level) {
-			  foreach ($level->getEntities() as $entity) {
-				  if (!empty($entity->namedtag->getString("server", ""))) {
+        foreach ($this->getServer()->getLevels() as $level) {
+            foreach ($level->getEntities() as $entity) {
+                if (!empty($entity->namedtag->getString("server", ""))) {
                     $server = explode(":", $entity->namedtag->getString("server", ""));
                     if (isset($server[0])) {
                         if ($server[0] === "server") {
@@ -144,19 +144,19 @@ class Main extends PluginBase implements Listener {
                                 $message = str_replace("{playing}", count($world->getPlayers()), $base);
                                 $lines[1] = $message;
                                 $nametag = implode("\n", $lines);
-			                    $entity->setNameTag($nametag);
+                                $entity->setNameTag($nametag);
                             } else {
                                 $lines = explode("\n", $entity->getNameTag());
                                 $message = $this->getConfig()->get("world_error_message");
                                 $lines[1] = $message;
                                 $nametag = implode("\n", $lines);
-			                    $entity->setNameTag($nametag);
+                                $entity->setNameTag($nametag);
                             }
                         }
                     }
-				}
-			}
-		}
+                }
+            }
+        }
     }
 
     public function onSlapperCreate(SlapperCreationEvent $ev) : void{
